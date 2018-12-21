@@ -1,0 +1,46 @@
+/*
+html {
+  background-color: #fff;
+}
+*/
+div.box {
+  display: flex;
+}
+
+div.matrix {
+  margin: 0em 2em;
+}
+
+div.graph {
+  margin: 0em 2em;
+}
+
+.rendered_html pre code {
+  background-color: #eff0f1;
+}
+.rendered_html pre {
+  background-color: #eff0f1;
+}
+
+.rise-enabled {
+  /*background-image: url("/notebooks/include/images/karate.png");
+  */
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: right 5% bottom 5%;
+}
+
+.links {
+  stroke:  #ddd;
+}
+
+#bgdiv {
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  z-index: -1;
+  background-color: none;
+}
+
