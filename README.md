@@ -33,3 +33,5 @@ I `gzip`ed the Enron.csv data file to get it under the 100MB github
 file size limit. You probably will want to unzip it and update the 
 `pd.readcsv()` function call. The downside to leaving it zipped is that
 it will slow down reading in the data a bit.
+
+[This notebook](https://github.com/keithpjolley/python_graph_demo) is available on GitHub and as a static web-page (disconnected from Python) [here](https://www.jamulheavyindustries.com/presentations/pythonsd_graph/).
