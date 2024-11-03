@@ -1,8 +1,10 @@
 /*
-html {
-  background-color: #fff;
-}
+
+This won't effect existing elements, only new ones created after it's
+loaded.
+
 */
+
 div.box {
   display: flex;
 }
@@ -18,12 +20,14 @@ div.graph {
 .rendered_html pre code {
   background-color: #eff0f1;
 }
+
 .rendered_html pre {
   background-color: #eff0f1;
 }
 
 .rise-enabled {
-  /*background-image: url("/notebooks/include/images/karate.png");
+  /*
+  background-image: url("/notebooks/include/images/karate.png");
   */
   background-color: transparent;
   background-repeat: no-repeat;
@@ -31,7 +35,8 @@ div.graph {
 }
 
 .links {
-  stroke:  #ddd;
+  stroke: grey;
+  opacity: 0.8;
 }
 
 #bgdiv {
@@ -44,3 +49,11 @@ div.graph {
   background-color: none;
 }
 
+.tooltip {
+  left: 0;
+  top: 0;
+  right: 100%;
+  bottom: 100%;
+  opacity: 0;
+  padding: 5px;
+}

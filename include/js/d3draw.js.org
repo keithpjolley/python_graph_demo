@@ -1,0 +1,126 @@
+function drawgraph(selector, graph, width = 300, height = 300) {
+
+  const links = graph.edges.map((d) => ({ ...d }));
+  const nodes = graph.nodes.map((d) => ({ ...d }));
+
+  const linkWidth = d3
+    .scaleLinear()
+    .domain(d3.extent(links.map((d) => d.weight)))
+    .range([1, 4]);
+
+console.log(links[0]);
+console.log(nodes[0]);
+
+  // Remove any existing svg elements.
+  d3.select(selector).selectAll("svg").remove();
+
+  const svg = d3
+    .select(selector)
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("viewBox", [-width / 2, -height / 2, width, height])
+    .attr("style", "max-width: 100%; height: auto;");
+
+  const link = svg.append("g")
+      .attr("stroke", "green")
+    .selectAll()
+    .data(links)
+    .join("line")
+      .attr("stroke-width", (d) => linkWidth(d.weight));
+
+  const node = svg.append("g")
+      .attr("stroke", "#fff")
+      .attr("stroke-width", 1.5)
+    .selectAll()
+    .data(nodes)
+    .join("circle")
+      .attr("r", (d) => d.radius)
+      .attr("fill", (d) => d.color);
+
+  node
+    .append("title")
+    .html(
+      (d) =>
+        "<strong>id: " +
+        d.id +
+        "</strong>" +
+        "<br>pr: " +
+        d.pr +
+        "<br>ei: " +
+        d.ei +
+        "<br>community: " +
+        d.community,
+    );
+
+  // Create a simulation with several forces.
+  const simulation = d3
+    .forceSimulation()
+    .on("tick", ticked)
+    .force("center", d3.forceCenter())
+    .force("manyBody", d3.forceManyBody())
+    .force(
+      "collide",
+      d3.forceCollide().radius((d) => d.radius + 2),
+    )
+    .force(
+      "link",
+      d3
+        .forceLink()
+        .id((d) => d.id)
+        .distance(
+          (d) =>
+            (d.source.community === d.target.community ? 1.5 : 2.5) *
+            (d.source.radius + d.target.radius),
+        ),
+      /*
+        .strength((d) => {
+            console.log(d);
+            return 1 / 2; // Math.min(d3.count(d.source), d3.count(d.target))
+        }
+        )
+*/
+    );
+  // Add a drag behavior.
+  node.call(d3.drag()
+      .on("start", dragstarted)
+      .on("drag", dragged)
+      .on("end", dragended));
+
+  // Reheat the simulation when drag starts, and fix the subject position.
+  function dragstarted(event) {
+    if (!event.active) simulation.alphaTarget(0.3).restart();
+    event.subject.fx = event.subject.x;
+    event.subject.fy = event.subject.y;
+  }
+
+  // Update the subject (dragged node) position during drag.
+  function dragged(event) {
+    event.subject.fx = event.x;
+    event.subject.fy = event.y;
+  }
+
+  // Restore the target alpha so the simulation cools after dragging ends.
+  // Unfix the subject position now that it’s no longer being dragged.
+  function dragended(event) {
+    if (!event.active) simulation.alphaTarget(0);
+    event.subject.fx = null;
+    event.subject.fy = null;
+  }
+
+  function ticked() {
+    link
+      .attr("x1", (d) =>
+//{console.log(`d.source.x: ${d.source.x}`); return 
+{console.log(`d: ${d}`); return 
+          d.source.x
+}
+      )
+      .attr("y1", (d) => d.source.y)
+      .attr("x2", (d) => d.target.x)
+      .attr("y2", (d) => d.target.y);
+    node
+      .attr("cx", d => d.x)
+      .attr("cy", d => d.y);
+  }
+} // draw()
