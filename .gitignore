@@ -4,3 +4,4 @@
 data/cal_graph.json
 .ipynb_checkpoints/
 .ipynb_checkpoints/*
+data/enronmails.csv
