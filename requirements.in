@@ -2,7 +2,7 @@ chart-studio==1.1.0
 communities==3.0.0
 graphviz==0.20.3
 jupyter-require==0.6.1
-jupyterlab==4.2.5
+jupyterlab==4.2.0
 jupyterlab_rise==0.42.0
 matplotlib==3.9.2
 matrepr==1.0.1
