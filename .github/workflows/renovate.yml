@@ -1,7 +1,7 @@
 name: Renovate
 on:
   schedule:
-    - cron: "0 14 * * 1" # Monday, 6am PST
+    - cron: 0 14 * * 1 # Monday, 6am PST
   workflow_dispatch:
 
 permissions:
@@ -23,5 +23,5 @@ jobs:
           # PAT needs repo, workflow permission
           token: ${{ secrets.RENOVATE_TOKEN }}
         env:
-          RENOVATE_REPOSITORIES: "keithpjolley/python_graph_demo"
-          RENOVATE_GIT_AUTHOR: "keith <keithpjolley@proton.me>"
+          RENOVATE_REPOSITORIES: keithpjolley/python_graph_demo
+          RENOVATE_GIT_AUTHOR: keith <keithpjolley@proton.me>
