@@ -1,0 +1,6 @@
+# The default reviewers.
+*       @keithpjolley
+
+# Other reviewers (teams or individuals) may be specified
+# to override the default for specific directories:
+# /terraform/modules @userid
