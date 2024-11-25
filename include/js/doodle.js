@@ -1,8 +1,6 @@
-function dodoodle(doodle_selector) {
-  console.log(`dodoodle(${selector})`);
-
-  const doodle_class = "doodle";
-  const doodle_class_selector = `.${doodle_class}`;
+function dodoodle(doodle_div_selector) {
+  const doodle_svg_class = "doodle";
+  const doodle_svg_selector = `.${doodle_svg_class}`;
   // Karate Club graph with some attributes pre-computed.
   const graph = {
     directed: false,
@@ -670,116 +668,112 @@ function dodoodle(doodle_selector) {
 
   // This is the "biggest" node. We want to control it.
   const kahuna = graph.nodes.sort((a, b) => b.ei - a.ei)[0]["id"];
-  d3.selectAll(doodle_class_selector).remove(); // just in case.
-  const svg = d3
-    .select(doodle_selector)
+
+  d3.selectAll(doodle_svg_selector).remove(); // just in case.
+  //    debugger;
+
+  // Append an SVG element to the doodle_div_selector.
+  let svg = d3
+    .select(doodle_div_selector)
     .append("svg")
-    .attr("class", doodle_class_selector);
+    .attr("class", doodle_svg_class)
+    .style("opacity", 0.3)
+    .style("width", "100%")
+    .style("height", "100%")
+    .style("position", "absolute")
+    .style("top", 0)
+    .style("left", 0)
+    .style("z-index", -1);
 
-  let linkWidth = d3
-    .scaleLinear()
-    .domain(d3.extent(graph.links.map((d) => d.weight)))
-    .range([0.5, 3]);
+  const links = graph.links.map((d) => ({ ...d }));
+  const nodes = graph.nodes.map((d) => ({ ...d }));
 
-  let simulation = d3
-    .forceSimulation()
+  // Create a simulation with several forces.
+  const simulation = d3
+    .forceSimulation(nodes)
     .alphaDecay(0)
-    //.force("center",  d3.forceCenter(width/2, height/2))
-    .force(
-      "collide",
-      d3.forceCollide().radius((d) => d.radius * 0.75),
-    )
+    .velocityDecay(0.6)
     .force(
       "link",
-      d3
-        .forceLink()
-        .id((d) => d.id)
-        .distance(
-          (d) =>
-            (d.source.radius + d.target.radius) *
-            (d.source.community === d.target.community ? 2.5 : 7.5),
-        ),
+      d3.forceLink(links).id((d) => d.id),
     )
-    .force("charge", d3.forceManyBody().strength(-5))
-    .nodes(graph.nodes)
-    .on("tick", ticked);
+    .force("charge", d3.forceManyBody())
+    .force(
+      "collide",
+      d3.forceCollide((d) => d.radius),
+    );
 
-  let link = svg
+  // Add a line for each link, and a circle for each node.
+  const link = svg
     .append("g")
-    .attr("class", "links")
+    .attr("stroke", "#999")
+    .attr("stroke-opacity", 0.6)
     .selectAll("line")
-    .data(graph.links)
-    .enter()
-    .append("line")
-    .attr("stroke-width", (d) => linkWidth(d.weight));
+    .data(links)
+    .join("line")
+    .attr("stroke-width", (d) => Math.sqrt(d.value));
 
-  let node = svg
+  const node = svg
     .append("g")
-    .attr("class", "nodes")
-    .selectAll("g")
-    .data(graph.nodes)
-    .enter()
-    .append("g");
-
-  let circles = node
-    .append("circle")
+    .selectAll("circle")
+    .data(nodes)
+    .join("circle")
     .attr("r", (d) => d.radius)
-    .attr("fill", (d) => {
-      var c = d3.hsl(d.color);
-      c.l = 0.85;
-      return c + "";
-    })
-    .attr("stroke", (d) => {
-      var c = d3.hsl(d.color);
-      c.l = 0.75;
-      return c + "";
-    });
+    .style("stroke", (d) => d3.color(d.color).darker())
+    .style("fill", (d) => d.color);
 
-  function ticked() {
-    const xscale = d3.scaleLinear().domain([-1, 1]).range([0, width]);
-    const yscale = d3.scaleLinear().domain([-1, 1]).range([0, height]);
+  const xscale = d3
+    .scaleLinear()
+    .domain([-1, 1])
+    .range([10, document.querySelector(doodle_svg_selector).clientWidth - 10]);
+  const yscale = d3
+    .scaleLinear()
+    .domain([-1, 1])
+    .range([10, document.querySelector(doodle_svg_selector).clientHeight - 10]);
+  const clamp = (min, val, max) => Math.max(min, Math.min(val, max));
+  const speed = 0.00001; // How fast the doodle moves. Bigger is faster.
+  // This will start the doodle in the top left corner of the screen.
+  const t0 = d3.now() * speed - Math.PI * 5.15;
+
+  simulation.on("tick", () => {
+    node
+      .attr("cx", (d) => {
+        //debugger;
+        if (d.id === kahuna) {
+          const t = d3.now() * speed - t0;
+          d.x = xscale(Math.cos(t));
+          d.y = yscale(Math.sin(t / 3));
+        }
+        return clamp(
+          d.radius,
+          d.x,
+          document.querySelector(doodle_svg_selector).clientWidth - d.radius,
+        );
+      })
+      .attr("cy", (d) =>
+        clamp(
+          d.radius,
+          d.y,
+          document.querySelector(doodle_svg_selector).clientHeight - d.radius,
+        ),
+      );
     link
       .attr("x1", (d) => d.source.x)
       .attr("y1", (d) => d.source.y)
       .attr("x2", (d) => d.target.x)
       .attr("y2", (d) => d.target.y);
-    node.attr("transform", (d) => {
-      if (d.id === kahuna) {
-        let t = d3.now();
-        const speed = 0.00001;
-        d.x = xscale(Math.cos(t * speed));
-        d.y = yscale(Math.sin((t * speed) / 3));
-      }
-      return `translate(${d.x}, ${d.y})`;
-    });
-    /*
-      .attr("cx", (d) => {
-        return (d.x = Math.max(d.radius, Math.min(width - d.radius, d.x)));
-      })
-      .attr("cy", (d) => {
-        return (d.y = Math.max(d.radius, Math.min(height - d.radius, d.y)));
-      });
-      */
-  } // ticked()
-
-  /*
-    d3.interval(() =>  {
-      simulation.restart();
-      return;
-    }, 5000);
-*/
+  });
 } // dodoodle()
 
-function waitForElm(selector) {
-  console.log(`Waiting for ${selector}`);
+function waitForElm(waitfor_selector) {
   return new Promise((resolve) => {
-    if (document.querySelector(selector)) {
-      return resolve(document.querySelector(selector));
+    if (document.querySelector(waitfor_selector)) {
+      return resolve(document.querySelector(waitfor_selector));
     }
     const observer = new MutationObserver((mutations) => {
-      if (document.querySelector(selector)) {
+      if (document.querySelector(waitfor_selector)) {
         observer.disconnect();
-        resolve(document.querySelector(selector));
+        resolve(document.querySelector(waitfor_selector));
       }
     });
     // If you get "parameter 1 is not of type 'Node'" error, see https://stackoverflow.com/a/77855838/492336
@@ -790,8 +784,14 @@ function waitForElm(selector) {
   });
 }
 
-const selector = "div.reveal.ready div.backgrounds";
-waitForElm(selector).then((elm) => {
-  console.log(`Selector created: ${selector}`);
-  dodoodle(selector);
-});
+function doinit(init_selector) {
+  if (typeof inited.already === "undefined") {
+    waitForElm(init_selector).then((elm) => {
+      dodoodle(init_selector);
+    });
+    inited.already = true;
+  }
+}
+
+var inited = inited || {};
+doinit("div.reveal.ready div.slides");
