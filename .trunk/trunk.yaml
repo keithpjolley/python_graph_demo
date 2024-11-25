@@ -33,6 +33,11 @@ lint:
     - shfmt@3.6.0
     - trufflehog@3.83.7
     - yamllint@1.35.1
+  ignore:
+    - linters:
+        - black
+      paths:
+        - graphs.ipynb
 actions:
   enabled:
     - trunk-announce

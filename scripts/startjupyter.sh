@@ -13,6 +13,9 @@ if [[ ! -d /tmp/venv ]]; then
 fi
 
 echo "INFO: ${me}: Sourcing virtualenv in /tmp/venv"
+# shellcheck doesn't like that `activate` file
+# doesn't exist.
+# shellcheck disable=SC1091
 source /tmp/venv/bin/activate
 hash -r
 
