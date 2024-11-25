@@ -10,7 +10,7 @@
 # supported CodeQL languages.
 #
 ---
-name: "CodeQL Advanced"
+name: CodeQL Advanced
 
 on:
   push:
@@ -21,6 +21,9 @@ on:
   #     - main
   # schedule:
   #   - cron: '32 17 * * 2'
+
+permissions:
+  contents: read # for checkout
 
 jobs:
   analyze:
