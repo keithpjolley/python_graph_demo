@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-deactivate 2>/dev/null || true # Fails if not in a virtualenv, that's OK.
+me="${0##*/}"
+
+deactivate 2>/dev/null
 
 set -e
-
-me="${0##*/}"
 
 if [[ ! -d /tmp/venv ]]; then
 	echo "INFO: ${me}: Creating virtualenv in /tmp/venv"
@@ -51,7 +51,7 @@ echo "INFO: ${me}: Pre-compile modules"
 # < graphs.ipynb sed '/import/!d;s/ *"//g;s#\\n,##;s#\..*##' | awk '{print $2}' | sort | parallel python -c '"import {}"'
 # pip list | awk 'NR>2&&!/-/{print $1}' | parallel python3 -c "'import {}'" #2>/dev/null
 # sed -n 's/ *//;s/#.*//;s/-.*//;s/=.*//p' requirements.txt | sort -u | xargs -I% python -c "import %"
-sed -En '/^[A-Za-z0-9_]+==/s/==.*//p' requirements.in | parallel python -c '"import {}"'
+(sed -En '/^[A-Za-z0-9_]+==/s/==.*//p' requirements.in || true) | parallel python -c '"import {}"'
 
 echo
 echo "INFO: ${me}: Running jupyter notebook"

@@ -1,4 +1,5 @@
 function dodoodle(doodle_div_selector) {
+  // This function creates a doodle in the div with the class `doodle_div_class`.
   const doodle_svg_class = "doodle";
   const doodle_svg_selector = `.${doodle_svg_class}`;
   // Karate Club graph with some attributes pre-computed.
@@ -666,13 +667,16 @@ function dodoodle(doodle_div_selector) {
     ],
   };
 
-  // This is the "biggest" node. We want to control it.
+  // This is the "biggest" node. We want to control it. All the
+  // other nodes will follow along.
   const kahuna = graph.nodes.sort((a, b) => b.ei - a.ei)[0]["id"];
 
-  d3.selectAll(doodle_svg_selector).remove(); // just in case.
-  //    debugger;
+  // The first iteration of this code was bad at only running
+  // once. This cleans up any remnants of previous doodles.
+  d3.selectAll(doodle_svg_selector).remove();
 
-  // Append an SVG element to the doodle_div_selector.
+  // Append an SVG element to the doodle_div_selector. Do all the
+  // css stuff here rather than add in a style.css file.
   let svg = d3
     .select(doodle_div_selector)
     .append("svg")
@@ -730,15 +734,27 @@ function dodoodle(doodle_div_selector) {
     .scaleLinear()
     .domain([-1, 1])
     .range([10, document.querySelector(doodle_svg_selector).clientHeight - 10]);
+
+  // `clamp()` is a helper function that makes sure the doodle stays
+  // within the bounds of the SVG, even if the SVG is resized.
   const clamp = (min, val, max) => Math.max(min, Math.min(val, max));
   const speed = 0.00001; // How fast the doodle moves. Bigger is faster.
   // This will start the doodle in the top left corner of the screen.
   const t0 = d3.now() * speed - Math.PI * 5.15;
 
   simulation.on("tick", () => {
+    // This is the main loop. It updates the position of the nodes and
+    // makes sure the links align to the nodes.
     node
       .attr("cx", (d) => {
-        //debugger;
+        // Drive the kahuna node in a Lissajous curve:
+        // x = cos(t), y = sin(t/3)
+        // https://www.wolframalpha.com/input?i=x+%3D+cos%28theta%29%2C+y%3Dsin%28theta%2F3%29
+        // gnuplot:
+        // set parametric
+        // set xrange [-1.1:1.1]
+        // set yrange [-1.1:1.1]
+        // plot [t=0:6*pi] cos(t), sin(t/3)
         if (d.id === kahuna) {
           const t = d3.now() * speed - t0;
           d.x = xscale(Math.cos(t));
@@ -766,6 +782,8 @@ function dodoodle(doodle_div_selector) {
 } // dodoodle()
 
 function waitForElm(waitfor_selector) {
+  // This adds a listener for when an element that matches the selector is added to the DOM.
+  // From stackoverflow.com/a/50846414/492336
   return new Promise((resolve) => {
     if (document.querySelector(waitfor_selector)) {
       return resolve(document.querySelector(waitfor_selector));
@@ -785,6 +803,7 @@ function waitForElm(waitfor_selector) {
 }
 
 function doinit(init_selector) {
+  // Add a listener for `selector`, once.
   if (typeof inited.already === "undefined") {
     waitForElm(init_selector).then((elm) => {
       dodoodle(init_selector);
