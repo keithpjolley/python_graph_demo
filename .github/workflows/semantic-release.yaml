@@ -33,5 +33,20 @@ jobs:
             @semantic-release/github@9
             @semantic-release/git@10
             conventional-changelog-conventionalcommits@7
+          branches: |
+            [
+              '+([0-9])?(.{+([0-9]),x}).x',
+              'main',
+              'next',
+              'next-major',
+              {
+                name: 'beta',
+                prerelease: true
+              },
+              {
+                name: 'alpha',
+                prerelease: true
+              }
+            ]
         env:
           GITHUB_TOKEN: ${{ secrets.SEMANTIC_GITHUB_TOKEN }}
