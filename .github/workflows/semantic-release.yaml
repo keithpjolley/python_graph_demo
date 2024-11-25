@@ -1,5 +1,5 @@
 ---
-name: Release
+name: Semantic Release
 
 on:
   workflow_dispatch:
@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   release:
-    name: Release
+    name: Semantic Release
     runs-on: ubuntu-latest
     permissions:
       contents: write # to be able to publish a GitHub release
@@ -33,5 +33,5 @@ jobs:
             @semantic-release/github@9
             @semantic-release/git@10
             conventional-changelog-conventionalcommits@7
-        # env:
-        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.SEMANTIC_GITHUB_TOKEN }}
