@@ -1,0 +1,28 @@
+---
+name: Renovate
+on:
+  schedule:
+    - cron: 0 14 * * 1 # Monday, 6am PST
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  contents: write
+  pull-requests: write
+
+concurrency: renovate
+
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@80eaf969abf68ad62aa94d9ab392421b31621634 # v40.3.4
+        with:
+          # PAT needs repo, workflow permission
+          token: ${{ secrets.RENOVATE_TOKEN }}
+        env:
+          RENOVATE_REPOSITORIES: keithpjolley/python_graph_demo
+          RENOVATE_GIT_AUTHOR: keith <keithpjolley@proton.me>
