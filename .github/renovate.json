@@ -1,23 +1,23 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:best-practices", ":semanticCommits"],
-  "prHourlyLimit": 3,
-  "packageRules": [
-    {
-      "enabled": false,
-      "matchCategories": ["python"]
-    }
-  ],
-  "labels": ["dependencies"],
-  "lockFileMaintenance": {
-    "enabled": true,
-    "schedule": ["at any time"]
-  },
-  "osvVulnerabilityAlerts": true,
-  "minimumReleaseAge": "10",
-  "semanticCommits": "enabled",
-  "vulnerabilityAlerts": {
-    "labels": ["security"],
-    "enabled": true
-  }
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": ["config:best-practices", ":semanticCommits"],
+	"prHourlyLimit": 3,
+	"packageRules": [
+		{
+			"enabled": false,
+			"matchCategories": ["python"]
+		}
+	],
+	"labels": ["dependencies"],
+	"lockFileMaintenance": {
+		"enabled": true,
+		"schedule": ["at any time"]
+	},
+	"osvVulnerabilityAlerts": true,
+	"minimumReleaseAge": "10",
+	"semanticCommits": "enabled",
+	"vulnerabilityAlerts": {
+		"labels": ["security"],
+		"enabled": true
+	}
 }

@@ -39,22 +39,14 @@ See the RISE documentation for usage.
 I also embedded [d3](https://d3js.org/) (and [Plotly](https://plotly.com/python/)
 because it's my preferred graph visualization tool.
 
-This is disabled. Ignore.
-~~There is a bug in the silly Karate Club graph I put in the background of
-the slideshow. When you exit out of the slide show it doesn't delete the
-html div I create so it continues to run at the top of the notebook, and
-if you restart the slide show it adds a second graph, and so on. I didn't
-bother fixing this but be aware that it's there.~~
-
 I compressed the Enron.csv data file to get it under the 100MB github
 file size limit. You may want to uncompress it. Reading it in
 uncompressed will be a little faster at the cost of ~200MB of disk space.
 
 There are a couple of small datasets you can play with in the `data` directory.
 
-[This notebook](https://github.com/keithpjolley/python_graph_demo) is
-available on GitHub ~~and as a static web-page (disconnected from Python)
-[here](https://www.jamulheavyindustries.com/presentations/pythonsd_graph/)~~
+This notebook is available on
+[GitHub](https://github.com/keithpjolley/python_graph_demo/).
 
 ## Creating requirements
 
