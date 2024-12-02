@@ -667,9 +667,10 @@ function dodoodle(doodle_div_selector) {
 		],
 	};
 
-	// This is the "biggest" node. We want to control it. All the
+	// This is the "most central" node. We want to control it. All the
 	// other nodes will follow along.
-	const kahuna = graph.nodes.sort((a, b) => b.ei - a.ei)[0].id;
+	graph.nodes.sort((a, b) => b.ei - a.ei);
+	const kahuna = graph.nodes[0].id;
 
 	// The first iteration of this code was bad at only running
 	// once. This cleans up any remnants of previous doodles.
