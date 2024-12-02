@@ -1,13 +1,12 @@
 # Python Graph Demonstration
 
+[![Trunk](https://github.com/keithpjolley/python_graph_demo/actions/workflows/trunk-check.yaml/badge.svg?branch=main)](https://github.com/keithpjolley/python_graph_demo/actions/workflows/trunk-check.yaml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=keithpjolley_python_graph_demo\&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=keithpjolley_python_graph_demo)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=keithpjolley_python_graph_demo\&metric=bugs)](https://sonarcloud.io/summary/new_code?id=keithpjolley_python_graph_demo)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=keithpjolley_python_graph_demo\&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=keithpjolley_python_graph_demo)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=keithpjolley_python_graph_demo\&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=keithpjolley_python_graph_demo)
 
 <!-- [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=keithpjolley_python_graph_demo&metric=coverage)](https://sonarcloud.io/summary/new_code?id=keithpjolley_python_graph_demo) -->
-
-[![SonarQube Cloud](https://sonarcloud.io/images/project_badges/sonarcloud-light.svg)](https://sonarcloud.io/summary/new_code?id=keithpjolley_python_graph_demo)
 
 Created for:
 
