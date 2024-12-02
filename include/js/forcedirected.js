@@ -9,11 +9,6 @@ function drawgraph(selector, graph, width = 300, height = 300) {
 		.domain(d3.extent(links.map((d) => d.weight)))
 		.range([1, 5]);
 
-	const angle = d3
-		.scaleLinear()
-		.domain(d3.extent(nodes.map((d) => d.community)))
-		.range([0, 2 * Math.PI]);
-
 	// Create a simulation with several forces.
 	const simulation = d3
 		.forceSimulation(nodes)
