@@ -36,31 +36,31 @@ lint:
     - mypy@1.13.0
     - pre-commit-hooks@5.0.0
     - pylint@3.3.2
-    - pyright@1.1.389
+    - pyright@1.1.390
     - remark-lint@12.0.1
     - rome@12.1.3
-    - ruff-nbqa@0.8.1
+    - ruff-nbqa@0.8.2
     - sourcery@1.25.0
     - trivy@0.56.2
-    - trufflehog-git@3.84.1
+    - trufflehog-git@3.85.0
     - trunk-toolbox@0.5.4
     - yapf@0.43.0
     - bandit@1.8.0
     - autopep8@2.3.1
     - isort@5.13.2
     - actionlint@1.7.4
-    - renovate@39.38.0
+    - renovate@39.49.3
     - taplo@0.9.3
     - black@24.10.0
-    - checkov@3.2.324
+    - checkov@3.2.332
     - git-diff-check
     - markdownlint@0.43.0
     - osv-scanner@1.9.1
     - oxipng@9.1.3
-    - ruff@0.8.1
+    - ruff@0.8.2
     - shellcheck@0.10.0
     - shfmt@3.6.0
-    - trufflehog@3.84.1
+    - trufflehog@3.85.0
     - yamllint@1.35.1
   # This fails in github actions. Runs fine locally.  ¯\_(ツ)_/¯
   ignore:
