@@ -11,6 +11,7 @@ clean() {
 trap 'clean' EXIT
 
 python3 -m venv "${tmpdir}"
+# shellcheck disable=SC1091
 . "${tmpdir}/bin/activate"
 
 pip3 --require-virtualenv install --upgrade 'poetry>=1.8,<2.0'
