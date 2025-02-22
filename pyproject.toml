@@ -1,0 +1,33 @@
+[tool.poetry]
+description = "Python Graph Demo (presentation to San Diego Python Meetup)"
+authors = ["Keith Jolley <keithpjolley@proton.me>"]
+readme = "README.md"
+maintainers = ["Keith Jolley <keithpjolley@proton.me>"]
+classifiers = [
+  # Specify the Python versions you support here. In particular, ensure
+  # that you indicate whether you support Python 2, Python 3 or both.
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.10",
+]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = ">=3.10,<4.0"
+chart-studio = ">0.0"
+plotly = ">0.0"
+communities = "~3.0"
+graphviz = "~0.20"
+jupyter-require = "~0.6"
+jupyterlab = "~4.3"
+jupyterlab_rise = "~0.43"
+matplotlib = "~3.10"
+matrepr = "~1.0"
+nbconvert = "~7.16"
+networkx = "~3.4"
+numpy = "~2.2"
+pandas = "~2.2"
+pandoc = "~2.4"
+scipy = "~1.15"
