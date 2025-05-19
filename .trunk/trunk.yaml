@@ -29,17 +29,17 @@ lint:
   enabled:
     - biome@1.9.4
     - flake8@7.2.0
-    - gitleaks@8.25.1
+    - gitleaks@8.26.0
     - kube-linter@0.7.2
     - markdown-link-check@3.13.7
-    - markdownlint-cli2@0.17.2
+    - markdownlint-cli2@0.18.1
     - mypy@1.15.0
     - pre-commit-hooks@5.0.0
     - pylint@3.3.7
     - pyright@1.1.400
     - remark-lint@12.0.1
     - rome@12.1.3
-    - ruff-nbqa@0.11.8
+    - ruff-nbqa@0.11.10
     - sourcery@1.36.0
     - trivy@0.62.1
     - trufflehog-git@3.88.29
@@ -52,12 +52,12 @@ lint:
     - renovate@40.0.6
     - taplo@0.9.3
     - black@25.1.0
-    - checkov@3.2.416
+    - checkov@3.2.424
     - git-diff-check
     - markdownlint@0.44.0
     - osv-scanner@2.0.2
     - oxipng@9.1.5
-    - ruff@0.11.8
+    - ruff@0.11.10
     - shellcheck@0.10.0
     - shfmt@3.6.0
     - trufflehog@3.88.29
