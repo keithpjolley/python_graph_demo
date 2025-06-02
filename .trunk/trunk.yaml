@@ -2,18 +2,18 @@
 # To learn more about the format of this file, see https://docs.trunk.io/reference/trunk-yaml
 version: 0.1
 cli:
-  version: 1.22.15
+  version: 1.24.0
 # Trunk provides extensibility via plugins. (https://docs.trunk.io/plugins)
 plugins:
   sources:
     - id: trunk
-      ref: v1.6.8
+      ref: v1.7.0
       uri: https://github.com/trunk-io/plugins
 # Many linters and tools depend on runtimes - configure them here. (https://docs.trunk.io/runtimes)
 runtimes:
   enabled:
     - go@1.21.0
-    - node@18.20.5
+    - node@22.16.0
     - python@3.10.8
 # This is the section where you manage your linters. (https://docs.trunk.io/check/configuration)
 lint:
@@ -33,34 +33,34 @@ lint:
     - kube-linter@0.7.2
     - markdown-link-check@3.13.7
     - markdownlint-cli2@0.18.1
-    - mypy@1.15.0
+    - mypy@1.16.0
     - pre-commit-hooks@5.0.0
     - pylint@3.3.7
-    - pyright@1.1.400
+    - pyright@1.1.401
     - remark-lint@12.0.1
     - rome@12.1.3
-    - ruff-nbqa@0.11.10
-    - sourcery@1.36.0
-    - trivy@0.62.1
-    - trufflehog-git@3.88.29
+    - ruff-nbqa@0.11.12
+    - sourcery@1.37.0
+    - trivy@0.63.0
+    - trufflehog-git@3.88.35
     - trunk-toolbox@0.5.4
     - yapf@0.43.0
     - bandit@1.8.3
     - autopep8@2.3.2
     - isort@6.0.1
     - actionlint@1.7.7
-    - renovate@40.0.6
+    - renovate@40.36.2
     - taplo@0.9.3
     - black@25.1.0
-    - checkov@3.2.424
+    - checkov@3.2.435
     - git-diff-check
-    - markdownlint@0.44.0
+    - markdownlint@0.45.0
     - osv-scanner@2.0.2
     - oxipng@9.1.5
-    - ruff@0.11.10
+    - ruff@0.11.12
     - shellcheck@0.10.0
     - shfmt@3.6.0
-    - trufflehog@3.88.29
+    - trufflehog@3.88.35
     - yamllint@1.37.1
   # This fails in github actions. Runs fine locally.  ¯\_(ツ)_/¯
   ignore:
