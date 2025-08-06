@@ -10,7 +10,11 @@ clean() {
 }
 trap 'clean' EXIT
 
-python3 -m venv "${tmpdir}"
+# I recently installed python3.14 before GA and it 
+# causes problems so hardcode a working version for now.
+# It normally would be fine to just leave this as
+# `python3`.
+python3.13 -m venv "${tmpdir}"
 # shellcheck disable=SC1091
 . "${tmpdir}/bin/activate"
 
